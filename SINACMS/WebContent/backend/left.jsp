@@ -16,8 +16,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		jQuery('#navigation').accordion({
 			header: '.head',
 			event: 'click',
-			fillSpace: true,
-			animated: 'bounceslide'
+			fillSpace: true
+			/*animated: 'bounceslide'  */
 		});
 	});
 </script>
