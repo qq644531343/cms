@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<title>CMS 后台管理工作平台</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css"/>
 	<script type="text/javascript" src="js/js.js"></script>
+
 </head>
 <body>
 <div id="top"> </div>
@@ -33,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <label>验证码：
         <input name="chknumber" type="text" id="chknumber" maxlength="4" class="chknumber_input" />
         </label>
-        <img src="images/checkcode.png" id="safecode" />
+        <img src="images/checkcode.jpg" id="safecode" onclick="reloadcode(this)" title="点击刷新"  style="vertical-align: top;margin-left: 5px;"/>
       </div>
     </div>
     <div id="center_middle_right"></div>
