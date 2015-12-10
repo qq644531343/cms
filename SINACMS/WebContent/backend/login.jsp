@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/backend/";
@@ -19,7 +20,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <form id="login" action="login" method="post">
   <div id="center">
+  <c:if test="${error != null}">
   	<div>${ error }</div>
+  </c:if>
     <div id="center_middle">
       <div class="user">
         <label>用户名：

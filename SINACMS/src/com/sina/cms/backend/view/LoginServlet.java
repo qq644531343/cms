@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 			return;
 		}
 		
-		//判断用户名密码
+		//判断用户名密码  
 		
 		//登录通过
 		response.sendRedirect(request.getContextPath()+ "/backend/main.jsp");
