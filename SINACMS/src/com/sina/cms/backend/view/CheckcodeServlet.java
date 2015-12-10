@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
+
 import com.sina.cms.backend.tools.NumberTool;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
@@ -53,14 +55,17 @@ public class CheckcodeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		response.setContentType("image/jpeg");
-		this.generateImage(response.getOutputStream());
+		this.generateImage(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.doGet(request, response);
 	}
 	
-	private void generateImage(OutputStream out) {
+	private void generateImage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		OutputStream out = response.getOutputStream();
+		
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = image.createGraphics();
 		
@@ -71,9 +76,12 @@ public class CheckcodeServlet extends HttpServlet {
 		int y = height - 4;
 		
 		Random random = new Random();
+		StringBuilder sbBuilder = new StringBuilder();
+		
 		for(int i = 0 ; i < number; i++) {
 			int index = random.nextInt(codes.length());
 			String c = "" +  codes.charAt(index);
+			sbBuilder.append(c);
 			int red = random.nextInt(255);
 			int green = random.nextInt(255);
 			int blue = random.nextInt(255);
@@ -81,6 +89,9 @@ public class CheckcodeServlet extends HttpServlet {
 			g.setFont(new Font("Arial", Font.PLAIN, NumberTool.random(height/2, height)));
 			g.drawString(c, i*x + 3, y);
 		}
+		
+		//存储验证码到session
+		request.getSession().setAttribute("checkcode", sbBuilder.toString());
 		
 		//随机生成点
 		for(int i = 0; i < 50 ; i++) {
@@ -97,11 +108,7 @@ public class CheckcodeServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			out.close();
 		}
 	}
 

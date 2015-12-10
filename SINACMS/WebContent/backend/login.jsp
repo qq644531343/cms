@@ -17,22 +17,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <div id="top"> </div>
 
-<form id="login" action="main.jsp" method="post">
+<form id="login" action="login" method="post">
   <div id="center">
+  	<div>${ error }</div>
     <div id="center_middle">
       <div class="user">
         <label>用户名：
-        <input type="text" name="user" id="user" />
+        <input type="text" name="username" id="user" value="${param.username}"/>
         </label>
       </div>
       <div class="user">
         <label>密　码：
-        <input type="password" name="pwd" id="pwd" />
+        <input type="password" name="password" id="pwd" value="${param.password}" />
         </label>
       </div>
       <div class="chknumber">
         <label>验证码：
-        <input name="chknumber" type="text" id="chknumber" maxlength="4" class="chknumber_input" />
+        <input name="checkcode" type="text" id="chknumber" maxlength="4" class="chknumber_input" />
         </label>
         <img src="images/checkcode.jpg" id="safecode" onclick="reloadcode(this)" title="点击刷新"  style="vertical-align: top;margin-left: 5px;"/>
       </div>
