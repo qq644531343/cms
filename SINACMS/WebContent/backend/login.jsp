@@ -18,25 +18,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <div id="top"> </div>
 
-<form id="login" action="login" method="post">
+<form id="login" action="login" method="post" >
   <div id="center">
-  <c:if test="${error != null}">
-  	<div>${ error }</div>
+  <c:if test="${sessionScope.error != null}">
+  	<div id="errorserver">${ error }</div>
+  	<c:remove var="error" scope="session"/>
   </c:if>
+  <div id="error"></div>
     <div id="center_middle">
       <div class="user">
         <label>用户名：
-        <input type="text" name="username" id="user" value="${param.username}"/>
+        <input type="text" name="username" id="username" value="${param.username}"/>
         </label>
       </div>
       <div class="user">
         <label>密　码：
-        <input type="password" name="password" id="pwd" value="${param.password}" />
+        <input type="password" name="password" id="password" value="${param.password}" />
         </label>
       </div>
       <div class="chknumber">
         <label>验证码：
-        <input name="checkcode" type="text" id="chknumber" maxlength="4" class="chknumber_input" />
+        <input name="checkcode" type="text" id="checkcode" maxlength="4" class="chknumber_input" />
         </label>
         <img src="images/checkcode.jpg" id="safecode" onclick="reloadcode(this)" title="点击刷新"  style="vertical-align: top;margin-left: 5px;"/>
       </div>
