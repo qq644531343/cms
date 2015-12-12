@@ -1,8 +1,6 @@
 package com.sina.cms.backend.view;
 
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		//判断用户名密码  
-		
+		 
 		//登录通过
 		request.getSession().setAttribute("user", username);
 		response.sendRedirect(request.getContextPath()+ "/backend/main.jsp");

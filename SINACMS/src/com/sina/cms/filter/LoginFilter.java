@@ -64,13 +64,7 @@ public class LoginFilter implements Filter {
 			return true;
 		}
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/backend/login.jsp");
-		response.setStatus(400);
-		try {
-			dispatcher.forward(request, response);
-		} catch (ServletException e) {
-			e.printStackTrace();
-		}
+		response.sendRedirect(request.getContextPath() + "/backend/login.jsp");
 		return false;
 	}
 

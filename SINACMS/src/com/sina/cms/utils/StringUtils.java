@@ -9,4 +9,8 @@ public class StringUtils {
 		return false;
 	}
 	
+	public static boolean isNotEmpty(String string) {
+		return ! StringUtils.isEmpty(string);
+	}
+	
 }
