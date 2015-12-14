@@ -2,6 +2,8 @@ package com.sina.cms.model;
 
 import java.util.Date;
 
+import com.sina.cms.backend.tools.DateTool;
+
 public class ArticleModel {
 
 	private String title;
@@ -15,6 +17,10 @@ public class ArticleModel {
 	private int status;
 	private String ownerUsername;
 	private String content;
+	
+	private String createDateString;
+	private String updateDateString;
+	private String publishDateString;
 	
 	public String getTitle() {
 		return title;
@@ -81,6 +87,17 @@ public class ArticleModel {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	
+	public String getCreateDateString() {
+		return DateTool.stringFromSimpeDate(createDate);
+	}
+	public String getUpdateDateString() {
+		return DateTool.stringFromSimpeDate(updateDate);
+	}
+	public String getPublishDateString() {
+		return DateTool.stringFromSimpeDate(publishDate);
 	}
 	@Override
 	public String toString() {

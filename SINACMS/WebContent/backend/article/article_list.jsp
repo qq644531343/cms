@@ -1,3 +1,5 @@
+<%@page import="com.sina.cms.backend.tools.DateTool"%>
+<%@page import="com.sina.cms.dao.ArticleDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/backend/common/taglib.jsp" %>
@@ -11,6 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 	<base href="<%=basePath%>">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="text/javascript" src="/cms/backend/js/js.js"></script>
 	<title>CMS 后台管理工作平台</title>
 <style type="text/css">
 <!--
@@ -29,6 +32,11 @@ body {
 .STYLE19 {
 	color: #344b50;
 	font-size: 12px;
+	max-width: 120px;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+	overflow: hidden;  
 }
 .STYLE21 {
 	font-size: 12px;
@@ -124,15 +132,15 @@ td {
 	          <input type="checkbox" name="checkbox2" id="checkbox2" />
 	        </div></td>
 	        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><a href="#" title="点击查看和编辑文章">${art.title }</a></div></td>
-	        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">http://www.leadfar.org</div></td>
-	        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">20</div></td>
-	        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">5</div></td>
-	        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">2010-07-19</div></td>
-	        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">2010-07-19</div></td>
-	        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">2010-07-19</div></td>
+	        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><a href="${art.originUrl }" target="_blank">${art.originUrl }</a></div></td>
+	        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${art.clickNums }</div></td>
+	        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${art.replyNums }</div></td>
+	        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${art.createDateString }</div></td>
+	        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${art.updateDateString }</div></td>
+	        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${art.publishDateString }</div></td>
 	        <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE21">
 	        <a href="#" title="点击发布文章">发布</a> | 
-	        <a href="#" title="点击删除文章">删除</a> |
+	        <a href="javascript:void(0);" onclick="deleteArt(${art.tid})" title="点击删除文章">删除</a> |
 	        <a href="#" title="点击编辑文章">编辑</a>
 	        </div></td>
 	      </tr>
@@ -149,7 +157,7 @@ td {
     <td height="30">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="33%"><div align="left"><span class="STYLE22">&nbsp;&nbsp;&nbsp;&nbsp;共有<strong> 243</strong> 条记录，当前第<strong> 1</strong> 页，共 <strong>10</strong> 页</span></div></td>
+        <td width="33%"><div align="left"><span class="STYLE22">&nbsp;&nbsp;&nbsp;&nbsp;共有<strong> <%=new ArticleDAO().queryCountArticle() %></strong> 条记录，当前第<strong> 1</strong> 页，共 <strong>10</strong> 页</span></div></td>
         <td width="67%" align=right vAlign="center" noWrap>
 				<a href="#">首页</a>
 				<font color="red">1</font>

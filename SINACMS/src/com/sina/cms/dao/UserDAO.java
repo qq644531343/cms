@@ -32,11 +32,11 @@ public class UserDAO {
 		
 		Connection connection = DBUtil.getConnection();
 		PreparedStatement pStatement = null;
-		
+		ResultSet set = null;
 		try {
 			 pStatement = connection.prepareStatement("select * from user where username=?");
 			 pStatement.setString(1, username);
-			 ResultSet set = pStatement.executeQuery();
+			 set = pStatement.executeQuery();
 			 if (set.next()) {
 				user = new UserModel();
 				user.setUsername(username);
@@ -53,7 +53,9 @@ public class UserDAO {
 			
 			e.printStackTrace();
 		}finally {
+			DBUtil.close(set);
 			DBUtil.close(pStatement);
+			DBUtil.close(connection);
 		}
 		return user;
 	}

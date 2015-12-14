@@ -20,3 +20,12 @@ function form_reset(){
 function reloadcode(img){
     img.setAttribute('src','images/checkcode.jpg?'+Math.random());
 }
+
+function deleteArt(tid) {
+	var res = confirm("确定删除吗?");
+	if(res == true) {
+		window.location.href ="/cms/backend/DeleteArticleServlet?tid=" + tid;
+	}else {
+		
+	}
+}
