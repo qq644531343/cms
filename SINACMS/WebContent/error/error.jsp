@@ -13,7 +13,7 @@
 		if(statuscode == 404){
 			request.setAttribute("error", "您访问的页面不见了！");
 		}else if(statuscode == 500) {
-			request.setAttribute("error", "服务器挂了!!");
+			request.setAttribute("error", "服务器挂了！！！");
 		}else {
 			request.setAttribute("error", request.getAttribute("javax.servlet.error.message") + "("+code+")");
 		}

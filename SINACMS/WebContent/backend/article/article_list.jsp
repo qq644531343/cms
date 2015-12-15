@@ -125,10 +125,11 @@ td {
 										</table></td>
 									<td><div align="right">
 											<span class="STYLE1"> &nbsp;&nbsp;<img
-												src="images/add.gif" width="10" height="10" /> <a href="article/add_article.jsp">添加</a>
-												&nbsp;&nbsp;<img src="images/edit.gif" width="10"
-												height="10" /> <a href="#">发布</a> &nbsp; <img
-												src="images/del.gif" width="10" height="10" /> <a href="javascript:void(0)" onclick="deleteArts()">删除</a>
+												src="images/add.gif" width="10" height="10" /> <a
+												href="article/add_article.jsp">添加</a> &nbsp;&nbsp;<img
+												src="images/edit.gif" width="10" height="10" /> <a href="#">发布</a>
+												&nbsp; <img src="images/del.gif" width="10" height="10" />
+												<a href="javascript:void(0)" onclick="deleteArts()">删除</a>
 												&nbsp;&nbsp; &nbsp;
 											</span><span class="STYLE1"> &nbsp;</span>
 										</div></td>
@@ -144,7 +145,8 @@ td {
 					<tr>
 						<td width="4%" height="20" bgcolor="d3eaef" class="STYLE10"><div
 								align="center">
-								<input type="checkbox" name="checkbox" id="checkbox" onclick="selectAll(this)"/>
+								<input type="checkbox" name="checkbox" id="checkbox"
+									onclick="selectAll(this)" />
 							</div></td>
 						<td width="100" height="20" bgcolor="d3eaef" class="STYLE6"><div
 								align="center">
@@ -184,7 +186,8 @@ td {
 						<c:forEach items="${articles }" var="art">
 							<tr>
 								<td height="20" bgcolor="#FFFFFF"><div align="center">
-										<input type="checkbox" name="checkbox2" id="checkbox2" value="${art.tid }"/>
+										<input type="checkbox" name="checkbox2" id="checkbox2"
+											value="${art.tid }" />
 									</div></td>
 								<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div
 										align="center">
@@ -208,7 +211,7 @@ td {
 										class="STYLE21">
 										<a href="#" title="点击发布文章">发布</a> | <a
 											href="javascript:void(0);" onclick="deleteArt(${art.tid})"
-											title="点击删除文章">删除</a> | <a href="#" title="点击编辑文章">编辑</a>
+											title="点击删除文章">删除</a> | <a href="article/update_article.jsp?tid=${art.tid}" title="点击编辑文章">编辑</a>
 									</div></td>
 							</tr>
 						</c:forEach>

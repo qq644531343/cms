@@ -109,7 +109,9 @@ fieldset div {
 <div id="formwrapper">
 	<h3>${message }</h3>
 	<div class="enter">
-	    <input name="addArticle" type="button" class="buttom" value="继续添加文章" onclick="onAddClick(${result})"/>
+		<c:if test="${ !update }">
+			<input name="addArticle" type="button" class="buttom" value="继续添加文章" onclick="onAddClick(${result})"/>
+		</c:if>
 	    <input name="return" type="button" class="buttom" value="返回列表页面" onclick="window.location = 'SearchArticleServlet'"/>
 	</div>
 </div>

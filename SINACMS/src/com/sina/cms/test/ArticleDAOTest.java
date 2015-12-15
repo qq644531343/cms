@@ -60,7 +60,8 @@ public class ArticleDAOTest {
 
 	@Test
 	public void deleteArticle() {
-		System.out.println(dao.deleteArticle(5));
+		String[] tids = new String[]{"1"};
+		System.out.println(dao.deleteArticles(tids));
 	}
 
 	@Test
