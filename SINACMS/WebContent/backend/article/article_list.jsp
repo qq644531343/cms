@@ -128,7 +128,7 @@ td {
 												src="images/add.gif" width="10" height="10" /> <a href="article/add_article.jsp">添加</a>
 												&nbsp;&nbsp;<img src="images/edit.gif" width="10"
 												height="10" /> <a href="#">发布</a> &nbsp; <img
-												src="images/del.gif" width="10" height="10" /> <a href="#">删除</a>
+												src="images/del.gif" width="10" height="10" /> <a href="javascript:void(0)" onclick="deleteArts()">删除</a>
 												&nbsp;&nbsp; &nbsp;
 											</span><span class="STYLE1"> &nbsp;</span>
 										</div></td>
@@ -144,7 +144,7 @@ td {
 					<tr>
 						<td width="4%" height="20" bgcolor="d3eaef" class="STYLE10"><div
 								align="center">
-								<input type="checkbox" name="checkbox" id="checkbox" />
+								<input type="checkbox" name="checkbox" id="checkbox" onclick="selectAll(this)"/>
 							</div></td>
 						<td width="100" height="20" bgcolor="d3eaef" class="STYLE6"><div
 								align="center">

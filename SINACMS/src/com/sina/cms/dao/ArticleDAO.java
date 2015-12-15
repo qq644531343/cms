@@ -9,6 +9,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import sun.nio.cs.ext.TIS_620;
+
 import com.sina.cms.backend.tools.DateTool;
 import com.sina.cms.model.ArticleModel;
 import com.sina.cms.utils.DBUtil;
@@ -154,16 +156,24 @@ public class ArticleDAO {
 		return count;
 	}
 	
-	public boolean deleteArticle(int tid) {
+	public boolean deleteArticles(String[] tids) {
 		boolean result = false;
+		if (tids.length == 0) {
+			return result;
+		}
 		
 		Connection connection = DBUtil.getConnection();
 		Statement stmt = null;
-		String sql = "delete from article where tid=" + tid;
-		
+		StringBuilder sb = new StringBuilder();
+		sb.append("delete from article where");
+		for(int i = 0; i < tids.length; i ++ ) {
+			sb.append(" tid=" + tids[i] + " or");
+		}
+		sb.delete(sb.length()-2, sb.length());
+		System.out.println(sb.toString());
 		try {
 			stmt = connection.createStatement();
-			int res = stmt.executeUpdate(sql);
+			int res = stmt.executeUpdate(sb.toString());
 			if(res > 0) {
 				result = true;
 			}
@@ -173,7 +183,6 @@ public class ArticleDAO {
 			DBUtil.close(stmt);
 			DBUtil.close(connection);
 		}
-		
 		return result;
 	}
 	

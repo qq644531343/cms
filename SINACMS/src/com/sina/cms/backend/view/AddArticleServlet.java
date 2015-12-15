@@ -71,11 +71,11 @@ public class AddArticleServlet extends HttpServlet {
 		request.setAttribute("result", success);
 		if(success) {
 			request.setAttribute("message", msg);
+			request.getRequestDispatcher("/backend/article/add_article_success.jsp").forward(request, response);
 		}else {
-			request.setAttribute("message", "添加文章失败，" +msg);
+			request.setAttribute("error", "添加文章失败，" +msg);
+			request.getRequestDispatcher("/error/error.jsp").forward(request, response);
 		}
-		
-		request.getRequestDispatcher("/backend/article/add_article_success.jsp").forward(request, response);
 	}
 
 }

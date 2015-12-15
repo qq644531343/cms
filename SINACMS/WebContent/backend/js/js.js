@@ -29,3 +29,21 @@ function deleteArt(tid) {
 		
 	}
 }
+
+function deleteArts() {
+	var res = confirm("确定删除吗?");
+	if(res == true) {
+		var arry= new Array(); 
+		
+		window.location.href ="/cms/backend/DeleteArticleServlet?tids=" + array;
+	}else {
+		
+	}
+}
+
+function selectAll(box) {
+	var subBoxes = document.getElementsByName("checkbox2");
+	for (var int = 0; int < subBoxes.length; int++) {
+		subBoxes[int].checked = box.checked;
+	}
+}

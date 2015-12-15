@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
 
 import com.sina.cms.dao.ArticleDAO;
+import com.sina.cms.utils.StringUtils;
 
 /**
  * Servlet implementation class DeleteArticleServlet
@@ -28,22 +29,27 @@ public class DeleteArticleServlet extends HttpServlet {
  
     }
     
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.doGet(request, response);
+	}
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int tid = Integer.parseInt(request.getParameter("tid"));
-		boolean res = new ArticleDAO().deleteArticle(tid);
+		String[] tidsString = request.getParameterValues("tid");
+		
+		boolean res = false;
+		
+		if (tidsString.length > 0) {
+			res = new ArticleDAO().deleteArticles(tidsString);
+		}
 		
 		if (res) {
-			System.out.println("删除成功:" + tid);
+			System.out.println("删除成功:tid:" +" tids:" + tidsString);
 		}else {
-			System.out.println("删除失败:" + tid);
+			System.out.println("删除失败:tid:" + " tids:"+ tidsString);
 		}
 		//跳转文章列表
 		request.getRequestDispatcher("/backend/SearchArticleServlet").forward(request, response);
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
 }
