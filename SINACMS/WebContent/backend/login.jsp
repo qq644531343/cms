@@ -14,7 +14,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<title>CMS 后台管理工作平台</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css"/>
 	<script type="text/javascript" src="js/js.js"></script>
-	
+	<script type="text/javascript">
+		//防止login.jsp被嵌入frame中
+		if(window.parent != window) {
+			window.parent.location = window.location;
+		}
+	</script>
 </head>
 <body>
 <div id="top"> </div>

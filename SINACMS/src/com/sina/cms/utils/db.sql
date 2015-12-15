@@ -25,7 +25,7 @@ create table article (
 	replyNums   int,
 	createDate   timestamp,
 	updateDate   timestamp,
-	publishDate   timestamp,
+	publishDate   timestamp null,
 	status   int,
 	ownerUsername   varchar(24),
 	content   longtext

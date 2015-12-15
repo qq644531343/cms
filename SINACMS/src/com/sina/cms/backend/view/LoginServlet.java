@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sina.cms.model.UserModel;
 import com.sina.cms.utils.StringUtils;
 
 @WebServlet("/backend/login")
@@ -19,8 +20,6 @@ public class LoginServlet extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -28,11 +27,11 @@ public class LoginServlet extends HttpServlet {
 		
 		String sessionCheckcode = (String) request.getSession().getAttribute("checkcode");
 		
-		//验证码不正确
-		if (sessionCheckcode == null || checkcode == null || !sessionCheckcode.equalsIgnoreCase(checkcode)) {
-			redirect("验证码错误", request, response);
-			return;
-		}
+//		//验证码不正确
+//		if (sessionCheckcode == null || checkcode == null || !sessionCheckcode.equalsIgnoreCase(checkcode)) {
+//			redirect("验证码错误", request, response);
+//			return;
+//		}
 		
 		if (StringUtils.isEmpty(username)) {
 			redirect("请输入用户名", request, response);
@@ -45,9 +44,12 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		//判断用户名密码  
+		UserModel user = new UserModel();
+		user.setUsername("admin");
+		user.setPassword("admin");
 		 
 		//登录通过
-		request.getSession().setAttribute("user", username);
+		request.getSession().setAttribute("user", user);
 		response.sendRedirect(request.getContextPath()+ "/backend/main.jsp");
 	}
 	

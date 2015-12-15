@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sina.cms.backend.tools.DateTool;
 import com.sina.cms.model.ArticleModel;
 import com.sina.cms.utils.DBUtil;
 
@@ -32,12 +33,9 @@ public class ArticleDAO {
 			pstmt.setString(2, article.getOriginUrl());
 			pstmt.setLong(3, article.getClickNums());
 			pstmt.setInt(4, article.getReplyNums());
-			pstmt.setTimestamp(5, new Timestamp(article.getCreateDate()
-					.getTime()));
-			pstmt.setTimestamp(6, new Timestamp(article.getUpdateDate()
-					.getTime()));
-			pstmt.setTimestamp(7, new Timestamp(article.getPublishDate()
-					.getTime()));
+			pstmt.setTimestamp(5, DateTool.javaDateToTimestamp(article.getCreateDate()));
+			pstmt.setTimestamp(6, DateTool.javaDateToTimestamp(article.getUpdateDate()));
+			pstmt.setTimestamp(7, DateTool.javaDateToTimestamp(article.getPublishDate()));
 			pstmt.setInt(8, article.getStatus());
 			pstmt.setString(9, article.getOwnerUserId());
 			pstmt.setString(10, article.getContent());
@@ -110,7 +108,7 @@ public class ArticleDAO {
 
 		String sql = "select tid,title,originUrl,clickNums,replyNums,"
 				+ "createDate,updateDate,publishDate,status,ownerUsername"
-				+ " from article limit ?,?";
+				+ " from article order by tid desc limit ?,?";
 
 		try {
 			pstmt = connection.prepareStatement(sql);
@@ -194,12 +192,9 @@ public class ArticleDAO {
 			pstmt.setString(2, article.getOriginUrl());
 			pstmt.setLong(3, article.getClickNums());
 			pstmt.setInt(4, article.getReplyNums());
-			pstmt.setTimestamp(5, new Timestamp(article.getCreateDate()
-					.getTime()));
-			pstmt.setTimestamp(6, new Timestamp(article.getUpdateDate()
-					.getTime()));
-			pstmt.setTimestamp(7, new Timestamp(article.getPublishDate()
-					.getTime()));
+			pstmt.setTimestamp(5, DateTool.javaDateToTimestamp(article.getCreateDate()));
+			pstmt.setTimestamp(6, DateTool.javaDateToTimestamp(article.getUpdateDate()));
+			pstmt.setTimestamp(7, DateTool.javaDateToTimestamp(article.getPublishDate()));
 			pstmt.setInt(8, article.getStatus());
 			pstmt.setString(9, article.getOwnerUserId());
 			pstmt.setString(10, article.getContent());
@@ -228,12 +223,9 @@ public class ArticleDAO {
 		article.setOriginUrl(set.getString("originUrl"));
 		article.setClickNums(set.getInt("clickNums"));
 		article.setReplyNums(set.getInt("replyNums"));
-		article.setCreateDate(new java.util.Date(set.getTimestamp("createDate")
-				.getTime()));
-		article.setUpdateDate(new java.util.Date(set.getTimestamp("updateDate")
-				.getTime()));
-		article.setPublishDate(new java.util.Date(set.getTimestamp(
-				"publishDate").getTime()));
+		article.setCreateDate(DateTool.timestampToJavaDate(set.getTimestamp("createDate")));
+		article.setUpdateDate(DateTool.timestampToJavaDate(set.getTimestamp("updateDate")));
+		article.setPublishDate(DateTool.timestampToJavaDate(set.getTimestamp("publishDate")));
 		article.setStatus(set.getInt("status"));
 		article.setOwnerUserId(set.getString("ownerUsername"));
 		if (withContent) {
