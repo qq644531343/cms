@@ -184,7 +184,7 @@ td {
 						<c:forEach items="${articles }" var="art">
 							<tr>
 								<td height="20" bgcolor="#FFFFFF"><div align="center">
-										<input type="checkbox" name="checkbox2" id="checkbox2" />
+										<input type="checkbox" name="checkbox2" id="checkbox2" value="${art.tid }"/>
 									</div></td>
 								<td height="20" bgcolor="#FFFFFF" class="STYLE19"><div
 										align="center">

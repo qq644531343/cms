@@ -33,9 +33,15 @@ function deleteArt(tid) {
 function deleteArts() {
 	var res = confirm("确定删除吗?");
 	if(res == true) {
-		var arry= new Array(); 
-		
-		window.location.href ="/cms/backend/DeleteArticleServlet?tids=" + array;
+		var subBoxes = document.getElementsByName("checkbox2");
+		var url = "/cms/backend/DeleteArticleServlet?";
+		for (var int = 0; int < subBoxes.length; int++) {
+			if(subBoxes[int].checked) {
+				url = url + "tid="+ subBoxes[int].value + "&";
+			}
+		}
+		url = url.substring(0, url.length-1);
+		window.location.href = url;
 	}else {
 		
 	}
