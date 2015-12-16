@@ -35,7 +35,7 @@ public class DeleteArticleServlet extends HttpServlet {
 		
 		boolean res = false;
 		
-		if (tidsString.length > 0) {
+		if (tidsString != null && tidsString.length > 0) {
 			res = new ArticleDAO().deleteArticles(tidsString);
 		}
 		

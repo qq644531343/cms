@@ -30,3 +30,9 @@ create table article (
 	ownerUsername   varchar(24),
 	content   longtext
 );
+
+create table channel (
+	cid BIGINT primary key auto_increment,
+	title varchar(128) not null unique,
+	description longtext 
+);
