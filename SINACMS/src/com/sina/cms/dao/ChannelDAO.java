@@ -14,7 +14,7 @@ import com.sina.cms.utils.StringUtils;
 
 public class ChannelDAO {
 	
-	public List<ChannelModel> queryChannelList(int pageSize, int offset) {
+	public List<ChannelModel> queryChannelList(int pageSize, int offset, String titleKey) {
 		List<ChannelModel> list = new ArrayList<ChannelModel>();
 		
 		Connection connection = DBUtil.getConnection();
@@ -22,7 +22,9 @@ public class ChannelDAO {
 		Statement stmt = null;
 		
 		String sql = "select * from channel order by cid desc limit " + offset + "," + pageSize;
-		
+		if (StringUtils.isNotEmpty(titleKey)) {
+			sql = "select * from channel where title like '%"+titleKey+"%' order by cid desc limit " + offset + "," + pageSize;
+		}
 		try {
 			stmt = connection.createStatement();
 			set = stmt.executeQuery(sql);
@@ -71,12 +73,15 @@ public class ChannelDAO {
 		return channel;
 	}
 	
-	public int queryCountChannel() {
+	public int queryCountChannel(String titleKey) {
 		int count = 0;
 		Connection connection = DBUtil.getConnection();
 		Statement stmt = null;
 		ResultSet set = null;
 		String sql = "select count(*) from channel";
+		if (StringUtils.isNotEmpty(titleKey)) {
+			sql = "select count(*) from channel where title like '%"+titleKey+"%'";
+		}
 		
 		try {
 			stmt = connection.createStatement();

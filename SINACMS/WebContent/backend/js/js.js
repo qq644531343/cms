@@ -76,3 +76,8 @@ function selectAll(box) {
 		subBoxes[int].checked = box.checked;
 	}
 }
+
+function pagesizeChanged(select) {
+	var url = document.getElementById("firstPage").href + "&pagesize=" + select.value;
+	window.location = url;
+}

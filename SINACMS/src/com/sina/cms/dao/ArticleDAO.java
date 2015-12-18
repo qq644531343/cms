@@ -14,6 +14,7 @@ import sun.nio.cs.ext.TIS_620;
 import com.sina.cms.backend.tools.DateTool;
 import com.sina.cms.model.ArticleModel;
 import com.sina.cms.utils.DBUtil;
+import com.sina.cms.utils.StringUtils;
 
 public class ArticleDAO {
 
@@ -100,7 +101,7 @@ public class ArticleDAO {
 		return article;
 	}
 
-	public List<ArticleModel> queryArticleList(int pageSize, int offset) {
+	public List<ArticleModel> queryArticleList(int pageSize, int offset, String titleKey) {
 
 		ArrayList<ArticleModel> list = new ArrayList<ArticleModel>();
 
@@ -111,6 +112,11 @@ public class ArticleDAO {
 		String sql = "select tid,title,originUrl,clickNums,replyNums,"
 				+ "createDate,updateDate,publishDate,status,ownerUsername"
 				+ " from article order by tid desc limit ?,?";
+		if (StringUtils.isNotEmpty(titleKey)) {
+			sql = "select tid,title,originUrl,clickNums,replyNums,"
+					+ "createDate,updateDate,publishDate,status,ownerUsername"
+					+ " from article where title like '%"+titleKey+"%' order by tid desc limit ?,?";
+		}
 
 		try {
 			pstmt = connection.prepareStatement(sql);
@@ -132,12 +138,16 @@ public class ArticleDAO {
 		return list;
 	}
 	
-	public int queryCountArticle() {
+	public int queryCountArticle(String titleKey) {
 		int count = 0;
 		Connection connection = DBUtil.getConnection();
 		Statement stmt = null;
 		ResultSet set = null;
+		
 		String sql = "select count(*) from article";
+		if(StringUtils.isNotEmpty(titleKey)){
+			sql = "select count(*) from article where title like '%"+titleKey+"%'";
+		}
 		
 		try {
 			stmt = connection.createStatement();

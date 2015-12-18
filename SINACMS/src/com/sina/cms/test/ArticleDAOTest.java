@@ -49,13 +49,13 @@ public class ArticleDAOTest {
 
 	@Test
 	public void queryArticleList() {
-		List<ArticleModel> list = dao.queryArticleList(20, 0);
+		List<ArticleModel> list = dao.queryArticleList(20, 0, null);
 		System.out.println(list.size());
 	}
 
 	@Test
 	public void queryArticleCount() {
-		System.out.println(dao.queryCountArticle());
+		System.out.println(dao.queryCountArticle(null));
 	}
 
 	@Test

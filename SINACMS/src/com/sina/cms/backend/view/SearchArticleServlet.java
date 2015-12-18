@@ -30,10 +30,31 @@ public class SearchArticleServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String offsetstrString = request.getParameter("pager.offset");
+		String pageSizeString =  request.getParameter("pagesize");
+		String title = request.getParameter("title");
+		if (pageSizeString == null) {
+			pageSizeString = (String) request.getSession().getAttribute("pagesize");
+		}
+		
+		int offset = 0, pagesize = 5;
+		if (offsetstrString != null) {
+			offset = Integer.parseInt(offsetstrString);
+		}
+		if(pageSizeString != null) {
+			pagesize = Integer.parseInt(pageSizeString);
+		}
+		
+		request.getSession().setAttribute("pagesize", pagesize+"");
+		
 		//查询文章列表
-		List<ArticleModel> articles = new ArticleDAO().queryArticleList(5, 0);
+		ArticleDAO dao = new ArticleDAO();
+		List<ArticleModel> articles = dao.queryArticleList(pagesize, offset, title);
+		int total = dao.queryCountArticle(title);
 		
 		request.setAttribute("articles", articles);
+		request.setAttribute("total", total);
+		
 		System.out.println("查询文章列表");
 		//跳转文章列表
 		request.getRequestDispatcher("/backend/article/article_list.jsp").forward(request, response);

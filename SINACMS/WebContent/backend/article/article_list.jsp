@@ -139,6 +139,19 @@ td {
 				</table></td>
 		</tr>
 		<tr>
+  			<td align="right">
+  				<form action="SearchArticleServlet" method="get">
+  				<table width="29%" border="0" cellspacing="0" cellpadding="0" >
+  				<tr>
+  					<td align="left">文章标题：</td>
+  					<td width="160px"><input type="text" name="title" value="${param.title }"></td>
+  					<td><input type="submit" name="submit" value="查询"></td>
+  				</tr>
+  				</table>
+  				</form>
+  			</td>
+ 		</tr>
+		<tr>
 			<td>
 				<table width="100%" border="0" cellpadding="0" cellspacing="1"
 					bgcolor="#a8c7ce">
@@ -211,7 +224,9 @@ td {
 										class="STYLE21">
 										<a href="#" title="点击发布文章">发布</a> | <a
 											href="javascript:void(0);" onclick="deleteArt(${art.tid})"
-											title="点击删除文章">删除</a> | <a href="article/update_article.jsp?tid=${art.tid}" title="点击编辑文章">编辑</a>
+											title="点击删除文章">删除</a> | <a
+											href="article/update_article.jsp?tid=${art.tid}"
+											title="点击编辑文章">编辑</a>
 									</div></td>
 							</tr>
 						</c:forEach>
@@ -227,42 +242,10 @@ td {
 		</tr>
 		<tr>
 			<td height="30">
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<td width="33%"><div align="left">
-								<span class="STYLE22">&nbsp;&nbsp;&nbsp;&nbsp;共有<strong>
-										<%=new ArticleDAO().queryCountArticle()%></strong> 条记录，当前第<strong>
-										1</strong> 页，共 <strong>10</strong> 页
-								</span>
-							</div></td>
-						<td width="67%" align=right vAlign="center" noWrap><a
-							href="#">首页</a> <font color="red">1</font> <a href="#">2</a> <a
-							href="#">3</a> <a href="#">下页</a> <a href="#">尾页</a> <select
-							name="pagesize" onchange="selectPagesize(this)">
-
-								<option value="5" selected>5</option>
-
-								<option value="10">10</option>
-
-								<option value="15">15</option>
-
-								<option value="20">20</option>
-
-								<option value="25">25</option>
-
-								<option value="30">30</option>
-
-								<option value="35">35</option>
-
-								<option value="40">40</option>
-
-								<option value="45">45</option>
-
-								<option value="50">50</option>
-
-						</select></td>
-					</tr>
-				</table>
+				<jsp:include page="/backend/common/pager.jsp">
+				<jsp:param value="${total }" name="total"/>
+				<jsp:param value="SearchArticleServlet" name="url"/>
+				</jsp:include>
 			</td>
 		</tr>
 	</table>
