@@ -1,4 +1,4 @@
-<%@page import="com.sina.cms.dao.ArticleDAO"%>
+<%@page import="com.sina.cms.dao.ArticleDaoImpl"%>
 <%@page import="com.sina.cms.model.ArticleModel"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -6,15 +6,15 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/backend/";
+	+ request.getServerName() + ":" + request.getServerPort()
+	+ path + "/backend/";
 %>
 <%
 	String tidString = request.getParameter("tid");
 	if(tidString == null) return;
 	int tid = Integer.parseInt(tidString);
 	
-	ArticleModel article = new ArticleDAO().queryArticle(tid, true);
+	ArticleModel article = new ArticleDaoImpl().queryArticle(tid, true);
 	session.setAttribute("article", article);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

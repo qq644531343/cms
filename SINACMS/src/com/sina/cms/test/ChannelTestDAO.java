@@ -5,21 +5,21 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.sina.cms.dao.ChannelDAO;
+import com.sina.cms.dao.ChannelDaoImpl;
 import com.sina.cms.model.ChannelModel;
 
 public class ChannelTestDAO {
 	
-	private static ChannelDAO dao = null;
+	private static ChannelDaoImpl dao = null;
 	
 	@BeforeClass
 	public static void setup() {
-			dao = new ChannelDAO();
+			dao = new ChannelDaoImpl();
 	}
 	
 	@Test
 	public void testQuery() {
-		System.out.println(dao.queryChannelList(5, 0));
+		System.out.println(dao.queryChannelList(5, 0, null));
 	}
 	
 	@Test
@@ -38,7 +38,7 @@ public class ChannelTestDAO {
 	
 	@Test
 	public void updateChannel() {
-		List<ChannelModel> list = dao.queryChannelList(5, 0);
+		List<ChannelModel> list = dao.queryChannelList(5, 0, null);
 		ChannelModel channel = list.get(0);
 		channel.setTitle("xxx22xxxxx");
 		System.out.println(dao.updateChannel(channel));

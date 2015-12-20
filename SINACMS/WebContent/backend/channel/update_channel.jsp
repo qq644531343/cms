@@ -1,10 +1,10 @@
-<%@page import="com.sina.cms.dao.ChannelDAO"%>
+<%@page import="com.sina.cms.dao.ChannelDaoImpl"%>
 <%@page import="com.sina.cms.model.ChannelModel"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/backend/common/taglib.jsp" %>
 <%
-String path = request.getContextPath();
+	String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/backend/";
 %>
 <%
@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	if(cidString == null) return;
 	int cid = Integer.parseInt(cidString);
 	
-	ChannelModel channel = new ChannelDAO().queryChannel(cid);
+	ChannelModel channel = new ChannelDaoImpl().queryChannel(cid);
 	session.setAttribute("channel", channel);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

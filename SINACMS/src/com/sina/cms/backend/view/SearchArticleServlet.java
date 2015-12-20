@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sina.cms.dao.ArticleDAO;
+import com.sina.cms.backend.factory.PropertiesDaoFactory;
+import com.sina.cms.dao.ArticleDaoImpl;
 import com.sina.cms.model.ArticleModel;
 
 /**
@@ -48,7 +49,7 @@ public class SearchArticleServlet extends HttpServlet {
 		request.getSession().setAttribute("pagesize", pagesize+"");
 		
 		//查询文章列表
-		ArticleDAO dao = new ArticleDAO();
+		ArticleDaoImpl dao = (ArticleDaoImpl) PropertiesDaoFactory.getInstance().getBean("articleDao");
 		List<ArticleModel> articles = dao.queryArticleList(pagesize, offset, title);
 		int total = dao.queryCountArticle(title);
 		

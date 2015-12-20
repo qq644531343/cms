@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sina.cms.dao.ArticleDAO;
-import com.sina.cms.dao.ChannelDAO;
+import com.sina.cms.dao.ArticleDaoImpl;
+import com.sina.cms.dao.ChannelDaoImpl;
 
 @WebServlet("/backend/DeleteChannelServlet")
 public class DeleteChannelServlet extends HttpServlet {
@@ -27,7 +27,7 @@ public class DeleteChannelServlet extends HttpServlet {
 		boolean res = false;
 
 		if (tidsString!=null && tidsString.length > 0) {
-			res = new ChannelDAO().deleteChannels(tidsString);
+			res = new ChannelDaoImpl().deleteChannels(tidsString);
 		}
 
 		if (res) {

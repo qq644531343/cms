@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sina.cms.dao.ArticleDAO;
-import com.sina.cms.dao.ChannelDAO;
+import com.sina.cms.dao.ArticleDaoImpl;
+import com.sina.cms.dao.ChannelDaoImpl;
 import com.sina.cms.model.ChannelModel;
 import com.sina.cms.utils.StringUtils;
 
@@ -41,7 +41,7 @@ public class AddChannelServlet extends HttpServlet {
 		channel.setTitle(title);
 		channel.setDescription(description);
 		
-		boolean res = new ChannelDAO().addChannel(channel);
+		boolean res = new ChannelDaoImpl().addChannel(channel);
 		
 		if (!res) {
 			this.forward(false, "服务器故障", request, response);

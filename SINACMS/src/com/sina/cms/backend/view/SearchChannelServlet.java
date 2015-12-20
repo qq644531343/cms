@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sina.cms.dao.ArticleDAO;
-import com.sina.cms.dao.ChannelDAO;
+import com.sina.cms.dao.ArticleDaoImpl;
+import com.sina.cms.dao.ChannelDaoImpl;
 import com.sina.cms.model.ArticleModel;
 import com.sina.cms.model.ChannelModel;
 
@@ -47,7 +47,7 @@ public class SearchChannelServlet extends HttpServlet {
 		request.getSession().setAttribute("pagesize", pagesize+"");
 		
 		// 查询文章列表
-		ChannelDAO dao = new ChannelDAO();
+		ChannelDaoImpl dao = new ChannelDaoImpl();
 		List<ChannelModel> channels = dao.queryChannelList(pagesize, offset,title);
 		int total = dao.queryCountChannel(title);
 		

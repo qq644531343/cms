@@ -12,7 +12,7 @@ import com.sina.cms.model.ChannelModel;
 import com.sina.cms.utils.DBUtil;
 import com.sina.cms.utils.StringUtils;
 
-public class ChannelDAO {
+public class ChannelDaoImpl implements ChannelDao{
 	
 	public List<ChannelModel> queryChannelList(int pageSize, int offset, String titleKey) {
 		List<ChannelModel> list = new ArrayList<ChannelModel>();

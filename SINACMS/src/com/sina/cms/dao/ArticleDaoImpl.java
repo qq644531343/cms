@@ -5,18 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
-import sun.nio.cs.ext.TIS_620;
 
 import com.sina.cms.backend.tools.DateTool;
 import com.sina.cms.model.ArticleModel;
 import com.sina.cms.utils.DBUtil;
 import com.sina.cms.utils.StringUtils;
 
-public class ArticleDAO {
+public class ArticleDaoImpl  implements ArticleDao{
 
 	public boolean addArticle(ArticleModel article) {
 		if (article == null) {

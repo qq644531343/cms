@@ -7,16 +7,16 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.sina.cms.dao.ArticleDAO;
+import com.sina.cms.dao.ArticleDaoImpl;
 import com.sina.cms.model.ArticleModel;
 
 public class ArticleDAOTest {
 
-	private static ArticleDAO dao;
+	private static ArticleDaoImpl dao;
 
 	@BeforeClass
 	public static void setup() {
-		dao = new ArticleDAO();
+		dao = new ArticleDaoImpl();
 	}
 
 	@Test

@@ -1,4 +1,4 @@
-<%@page import="com.sina.cms.dao.ChannelDAO"%>
+<%@page import="com.sina.cms.dao.ChannelDaoImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/backend/common/taglib.jsp" %>

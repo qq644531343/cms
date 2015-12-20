@@ -1,5 +1,5 @@
 <%@page import="com.sina.cms.backend.tools.DateTool"%>
-<%@page import="com.sina.cms.dao.ArticleDAO"%>
+<%@page import="com.sina.cms.dao.ArticleDaoImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/backend/common/taglib.jsp"%>
@@ -140,7 +140,7 @@ td {
 		</tr>
 		<tr>
   			<td align="right">
-  				<form action="SearchArticleServlet" method="get">
+  				<form action="SearchArticleServlet" method="post">
   				<table width="29%" border="0" cellspacing="0" cellpadding="0" >
   				<tr>
   					<td align="left">文章标题：</td>

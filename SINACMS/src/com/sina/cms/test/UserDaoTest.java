@@ -4,16 +4,16 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.sina.cms.dao.UserDAO;
+import com.sina.cms.dao.UserDaoImpl;
 import com.sina.cms.model.UserModel;
 
 public class UserDaoTest {
 	
-	private static UserDAO dao = null;
+	private static UserDaoImpl dao = null;
 	
 	@BeforeClass
 	public static void setup () {
-		dao = new UserDAO();
+		dao = new UserDaoImpl();
 	}
 
 	@Test

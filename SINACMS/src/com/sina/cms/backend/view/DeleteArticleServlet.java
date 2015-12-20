@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sina.cms.dao.ArticleDAO;
+import com.sina.cms.dao.ArticleDaoImpl;
 
 /**
  * Servlet implementation class DeleteArticleServlet
@@ -36,7 +36,7 @@ public class DeleteArticleServlet extends HttpServlet {
 		boolean res = false;
 		
 		if (tidsString != null && tidsString.length > 0) {
-			res = new ArticleDAO().deleteArticles(tidsString);
+			res = new ArticleDaoImpl().deleteArticles(tidsString);
 		}
 		
 		if (res) {

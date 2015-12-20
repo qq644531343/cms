@@ -9,7 +9,7 @@ import com.sina.cms.model.UserModel;
 import com.sina.cms.utils.DBUtil;
 import com.sina.cms.utils.StringUtils;
 
-public class UserDAO {
+public class UserDaoImpl {
 
 	public boolean addUser(UserModel user) {
 		
