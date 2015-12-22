@@ -73,4 +73,13 @@
   <session-config>
     <session-timeout>60</session-timeout>
   </session-config>
+  <servlet>
+    <servlet-name>InitBeanFactoryServlet</servlet-name>
+    <servlet-class>com.sina.cms.backend.view.InitBeanFactoryServlet</servlet-class>
+    <init-param>
+      <param-name>configLocation</param-name>
+      <param-value>dao.properties</param-value>
+    </init-param>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
 </web-app>

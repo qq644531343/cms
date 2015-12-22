@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sina.cms.backend.factory.BeanFactory;
 import com.sina.cms.backend.factory.PropertiesDaoFactory;
+import com.sina.cms.dao.ArticleDao;
 import com.sina.cms.dao.ArticleDaoImpl;
 import com.sina.cms.model.ArticleModel;
 
@@ -18,10 +20,15 @@ import com.sina.cms.model.ArticleModel;
  * Servlet implementation class SearchArticleServlet
  */
 @WebServlet("/backend/SearchArticleServlet")
-public class SearchArticleServlet extends HttpServlet {
+public class SearchArticleServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
+	private ArticleDao articleDao;
        
-    /**
+    public void setArticleDao(ArticleDao articleDao) {
+		this.articleDao = articleDao;
+	}
+
+	/**
      * @see HttpServlet#HttpServlet()
      */
     public SearchArticleServlet() {
@@ -48,10 +55,8 @@ public class SearchArticleServlet extends HttpServlet {
 		
 		request.getSession().setAttribute("pagesize", pagesize+"");
 		
-		//查询文章列表
-		ArticleDaoImpl dao = (ArticleDaoImpl) PropertiesDaoFactory.getInstance().getBean("articleDao");
-		List<ArticleModel> articles = dao.queryArticleList(pagesize, offset, title);
-		int total = dao.queryCountArticle(title);
+		List<ArticleModel> articles = articleDao.queryArticleList(pagesize, offset, title);
+		int total = articleDao.queryCountArticle(title);
 		
 		request.setAttribute("articles", articles);
 		request.setAttribute("total", total);
