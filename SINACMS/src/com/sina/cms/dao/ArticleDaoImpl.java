@@ -8,52 +8,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
+import com.sina.cms.backend.factory.MyBatisSqlSessionFactory;
 import com.sina.cms.backend.tools.DateTool;
 import com.sina.cms.model.ArticleModel;
 import com.sina.cms.utils.DBUtil;
 import com.sina.cms.utils.StringUtils;
 
 public class ArticleDaoImpl  implements ArticleDao{
-
+	
 	public boolean addArticle(ArticleModel article) {
-		if (article == null) {
-			return false;
-		}
-
-		String sql = "insert into article "
-				+ "(title,originUrl,clickNums,replyNums,createDate,"
-				+ "updateDate,publishDate,status,ownerUsername,content) "
-				+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		Connection connection = DBUtil.getConnection();
-		PreparedStatement pstmt = null;
-
-		try {
-			pstmt = connection.prepareStatement(sql);
-			pstmt.setString(1, article.getTitle());
-			pstmt.setString(2, article.getOriginUrl());
-			pstmt.setLong(3, article.getClickNums());
-			pstmt.setInt(4, article.getReplyNums());
-			pstmt.setTimestamp(5, DateTool.javaDateToTimestamp(article.getCreateDate()));
-			pstmt.setTimestamp(6, DateTool.javaDateToTimestamp(article.getUpdateDate()));
-			pstmt.setTimestamp(7, DateTool.javaDateToTimestamp(article.getPublishDate()));
-			pstmt.setInt(8, article.getStatus());
-			pstmt.setString(9, article.getOwnerUserId());
-			pstmt.setString(10, article.getContent());
-
-			System.out.println(pstmt.toString());
-
-			int res = pstmt.executeUpdate();
-			if (res == 1) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBUtil.close(pstmt);
-			DBUtil.close(connection);
-		}
+		SqlSession session = MyBatisSqlSessionFactory.openSession();
+		session.insert(ArticleDao.class.getName() + ".addArticle", article);
+		session.commit();
+		session.close();
 		return true;
 	}
 
@@ -131,7 +100,12 @@ public class ArticleDaoImpl  implements ArticleDao{
 			DBUtil.close(pstmt);
 			DBUtil.close(connection);
 		}
-
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return list;
 	}
 	

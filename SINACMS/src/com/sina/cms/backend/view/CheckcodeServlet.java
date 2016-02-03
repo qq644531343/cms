@@ -50,6 +50,8 @@ public class CheckcodeServlet extends HttpServlet {
     	height = Integer.parseInt(config.getInitParameter("height"));
     	number = Integer.parseInt(config.getInitParameter("number"));
     	codes = config.getInitParameter("codes");
+    	
+    	super.init(config);
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

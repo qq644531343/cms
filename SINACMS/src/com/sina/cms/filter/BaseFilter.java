@@ -62,8 +62,6 @@ public class BaseFilter implements Filter {
 	}
 	
 	private boolean filter(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String uri = request.getRequestURI();
-		System.out.println(uri);
 		return true;
 	}
 

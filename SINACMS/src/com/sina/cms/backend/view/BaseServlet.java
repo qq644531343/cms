@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sina.cms.backend.factory.BeanFactory;
+import com.sina.cms.backend.factory.DAOFactory;
 
 import java.lang.reflect.*;
 
@@ -25,17 +26,7 @@ public class BaseServlet extends HttpServlet {
 		
 		for (Method method : methods) {
 			if (method.getName().startsWith("set")) {
-				String methodName = method.getName().substring(3);
-				StringBuilder sb = new StringBuilder(methodName);
-				sb.replace(0, 1, (sb.charAt(0) + "").toLowerCase());
-				System.out.println(sb.toString());
-				Object daoBean = factory.getBean(sb.toString());
-				try {
-					method.invoke(this, daoBean);
-				} catch (Exception e) {
-
-					e.printStackTrace();
-				}
+				DAOFactory.fillDaoBySetMethod(method, this);
 			}
 		}
 		

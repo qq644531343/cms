@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       ">
+
+	<bean id="articleDao" class="com.sina.cms.dao.ArticleDaoImpl"></bean>
+	<bean id="channelDao" class="com.sina.cms.dao.ChannelDaoImpl"></bean>
+	<bean id="userDao" class="com.sina.cms.dao.UserDaoImpl"></bean>
+	
+	<bean id="person" class="com.sina.cms.test.spring.Person">
+		<property name="name" value="hello"></property>
+	</bean>
+	
+	<bean id="personDao" class="com.sina.cms.test.spring.PersonDao"></bean>
+	<bean id="transaction" class="com.sina.cms.aspect.MyBatisSessionAspect"/>
+  	
+    <aop:config>  
+        <aop:aspect id="aspect" ref="transaction">  
+            <aop:pointcut id="pointUserMgr" expression="execution(* com.sina.cms.dao.*.*(..))"/>  
+            <aop:before method="openSession"  pointcut-ref="pointUserMgr"/>   
+            <aop:after-returning method="closeSession"  pointcut-ref="pointUserMgr"/>  
+        </aop:aspect>  
+    </aop:config> 
+    
+</beans>
